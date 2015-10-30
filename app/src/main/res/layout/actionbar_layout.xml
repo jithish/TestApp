@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingLeft="0dp"
+              android:paddingRight="0dp"
+              android:paddingTop="0dp"
+              android:paddingBottom="5dp"
+              android:background="@color/light_green"
+              android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green"
+        android:padding="4dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:text="EasyMail"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp20"
+            android:id="@+id/title_txv"
+            android:textColor="@color/white"
+            />
+<!--
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:id="@+id/addicon_imv"
+
+            android:paddingRight="2dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/plus"/>-->
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
+    lintOptions {
+        abortOnError false
+    }
+    defaultConfig {
+        applicationId "com.webs.jpndev.easymail"
+        minSdkVersion 10
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+   /* sourceSets {
+        testLocal {
+            java.srcDir file('src/androidTest/java')
+            resources.srcDir file('src/androidTest/resources')
+        }
+    }
+
+
+
+    android{
+        sourceSets {
+            instrumentTest.setRoot('src/androidTest/')
+        }
+    }
+  /*  sourceSets {
+
+        androidTest {
+            java.srcDirs = ['androidTest/java']
+        }
+        androidTest.setRoot('androidTest')
+
+    }
+*/
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'org.roboguice:roboguice:3.+'
+    provided 'org.roboguice:roboblender:3.+'
+    androidTestCompile fileTree(dir: 'libs', include: 'robotium-solo-5.5.2.jar')
+    //androidTestCompile fileTree(dir: 'libs', include: 'robotium-solo-5.5.1.jar')
+}
