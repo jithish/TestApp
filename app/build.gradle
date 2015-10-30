@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 22
     buildToolsVersion "21.1.2"
-    lintOptions {
+    /*lintOptions {
         abortOnError false
-    }
+    }*/
     defaultConfig {
         applicationId "com.webs.jpndev.easymail"
         minSdkVersion 10
