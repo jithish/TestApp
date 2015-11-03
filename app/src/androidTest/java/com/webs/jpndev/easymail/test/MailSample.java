@@ -33,9 +33,9 @@ public class MailSample extends ActivityInstrumentationTestCase2<MailActivity> {
         //Sleep for 6165 milliseconds
 		solo.sleep(1000);
         //Click on Empty Text View
-		solo.clickOnView(solo.getView(com.webs.jpndev.easymail.R.id.select_email_atxv));
+	//	solo.clickOnView(solo.getView(com.webs.jpndev.easymail.R.id.select_email_atxv));
         //Sleep for 15939 milliseconds
-		solo.sleep(500);
+	//	solo.sleep(500);
         //Enter the text: 'Jithishpn007@gmail.com'
 		solo.clearEditText((android.widget.EditText) solo.getView(com.webs.jpndev.easymail.R.id.select_email_atxv));
 		solo.enterText((android.widget.EditText) solo.getView(com.webs.jpndev.easymail.R.id.select_email_atxv), "Jithishpn007@gmail.com");
