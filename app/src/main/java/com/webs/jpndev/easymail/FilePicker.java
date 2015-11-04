@@ -264,7 +264,10 @@ test:
             timeout: 360
 
       circleci-android21
-
+test:
+    override:
+        - (./gradlew assemble):
+            timeout: 360
 
 dependencies:
     override:
