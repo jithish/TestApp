@@ -28,10 +28,8 @@ test:
   override:
    # run tests  against the emulator.
       - ./gradlew assembleDebug
-        timeout: 1200
       # run tests
       - ./gradlew assembleDebugTest
-        timeout: 1200
        # run script
       - source scripts/environmentSetup.sh && waitForAVD
     - echo "Running JUnit tests!"
