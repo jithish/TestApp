@@ -32,5 +32,5 @@ test:
       - ./gradlew assembleDebugTest
        # run script
       - (source scripts/environmentSetup.sh && waitForAVD)
-    - (echo "Running JUnit tests!")
-    - ./gradlew connectedAndroidTest
+      - echo "Running JUnit tests!"
+      - ./gradlew connectedAndroidTest
