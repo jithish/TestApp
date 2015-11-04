@@ -277,3 +277,44 @@ dependencies:
 
             */
 
+
+
+
+/*
+#
+
+# Build configuration for Circle CI
+#
+
+general:
+    artifacts:
+        - /home/ubuntu/TestApp/app/build/outputs/apk/
+
+machine:
+    environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
+dependencies:
+    override:
+        - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+        - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
+
+
+
+
+
+
+test:
+  override:
+    # start the emulator
+    - emulator -avd circleci-android21 -no-audio -no-window:
+        background: true
+        parallel: true
+    # wait for it to have booted
+    - circle-android wait-for-boot
+    # run tests  against the emulator.
+    - ./gradlew connectedAndroidTest
+    # copy the build outputs to artifacts
+    - cp -r /home/ubuntu/TestApp/app/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORT*/
+

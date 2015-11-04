@@ -1,35 +1,33 @@
-#
-# Build configuration for Circle CI
-#
+# Build configuration file for Circle CI
+# needs to be named `circle.yml` and should be in the top level dir of the repo
 
 general:
-    artifacts:
-        - /home/ubuntu/TestApp/app/build/outputs/apk/
+  artifacts:
+    -/home/ubuntu/**repo_name**/build/outputs/reports/**testFolderName**/connected
 
 machine:
-    environment:
-        ANDROID_HOME: /usr/local/android-sdk-linux
+  environment:
+    ANDROID_HOME: /home/ubuntu/android
+  java:
+    version: oraclejdk6
+
 dependencies:
-    override:
-        - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
-        - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
-
-
-
-
-
+  cache_directories:
+    - ~/.android
+    - ~/android
+  override:
+    - (echo "Downloading Android SDK v19 now!")
+    - (source scripts/environmentSetup.sh && getAndroidSDK)
 
 test:
+  pre:
+    - $ANDROID_HOME/tools/emulator -avd testAVD -no-skin -no-audio -no-window:
+      background: true
+    - (./gradlew assembleDebug):
+      timeout: 1200
+    - (./gradlew assembleDebugTest):
+      timeout: 1200
+    - (source scripts/environmentSetup.sh && waitForAVD)
   override:
-    # start the emulator
-    - emulator -avd circleci-android21 -no-audio -no-window:
-        background: true
-        parallel: true
-    # wait for it to have booted
-    - circle-android wait-for-boot
-    # run tests  against the emulator.
-    - ./gradlew connectedAndroidTest
-    # copy the build outputs to artifacts
-    - cp -r /home/ubuntu/TestApp/app/build/outputs $CIRCLE_ARTIFACTS
-    # copy the test results to the test results directory.
-    - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORT
+    - (echo "Running JUnit tests!")
+    - (./gradlew connectedAndroidTest)
