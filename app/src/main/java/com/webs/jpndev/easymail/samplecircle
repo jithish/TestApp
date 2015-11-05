@@ -118,6 +118,10 @@ deployment:
         - ./gradlew connectedAndroidTest
 
 
+,,,,,,,,,,,,,,,,,,,,,,
+ssh -p 64696 ubuntu@54.161.189.88 -L 8080:localhost:3000
+
+ssh -p 64696 ubuntu@54.161.189.88
 
 
 
