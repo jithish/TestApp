@@ -5,30 +5,26 @@
 
 general:
     artifacts:
-        -  /home/ubuntu/TestApp/app/build/outputs/apk/
+        - /home/ubuntu/TestApp/app/build/outputs/apk/
 
 machine:
-  environment:
-    ANDROID_HOME: /usr/local/android-sdk-linux
-    GRADLE_OPTS: -Xmx512m
-
+    environment:
+        ANDROID_HOME: /usr/local/android-sdk-linux
 dependencies:
-  post:
-    - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
-    -  echo n | android create avd -n testing -f -t android-18
-
+    override:
+        - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-21.1.2,android-21,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+        - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
 test:
   override:
-    - $ANDROID_HOME/tools/emulator -avd testing -no-window -no-boot-anim -no-audio:
+    # start the emulator
+    - emulator -avd circleci-android21 -no-audio -no-window:
         background: true
         parallel: true
-    - ./gradlew assembleDebug
-       # wait for it to have booted
-     -testing wait-for-boot
-      # run tests  against the emulator.
-      - ./gradlew connectedAndroidTest
-      # copy the build outputs to artifacts
-      - cp -r /home/ubuntu/TestApp/app/build/outputs $CIRCLE_ARTIFACTS
-      # copy the test results to the test results directory.
-      - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORT
-
+    # wait for it to have booted
+    - circle-android wait-for-boot
+    # run tests  against the emulator.
+    - ./gradlew connectedAndroidTest
+    # copy the build outputs to artifacts
+    - cp -r /home/ubuntu/TestApp/app/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORT
