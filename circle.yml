@@ -5,7 +5,7 @@
 
 general:
     artifacts:
-        - /home/ubuntu/TestApp/app/build/outputs/apk/
+        -  /home/ubuntu/TestApp/app/build/outputs/apk/
 
 machine:
   environment:
@@ -23,5 +23,12 @@ test:
         background: true
         parallel: true
     - ./gradlew assembleDebug
-    - bin/android-wait-for-emulator
-    - bin/run-tests test.namespace
+       # wait for it to have booted
+      - circle-android wait-for-boot
+      # run tests  against the emulator.
+      - ./gradlew connectedAndroidTest
+      # copy the build outputs to artifacts
+      - cp -r /home/ubuntu/TestApp/app/build/outputs $CIRCLE_ARTIFACTS
+      # copy the test results to the test results directory.
+      - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORT
+
