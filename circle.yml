@@ -5,7 +5,7 @@
 
 general:
     artifacts:
-        - /home/ubuntu/TestApp/app/build/outputs/apk/
+        - /home/ubuntu/TestApp/app/build/outputs/apk/test.apk
 
 machine:
     environment:
