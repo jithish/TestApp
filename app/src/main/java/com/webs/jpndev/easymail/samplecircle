@@ -191,6 +191,12 @@ test:
           - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORT
 
 
-
+///////////////////////////
     # copy the test results to the test results directory
-    - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results  $CIRCLE_TEST_REPORT
+     - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results  $CIRCLE_TEST_REPORT
+/////////////////////////////////
+ # copy the build outputs to artifacts
+    - cp -r /home/ubuntu/TestApp/app/build/outputs $CIRCLE_ARTIFACTS
+    # copy the test results to the test results directory.
+    - cp -r /home/ubuntu/TestApp/app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORT
+ ///////////////////////////////////
